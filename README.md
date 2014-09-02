@@ -1,6 +1,7 @@
 # Math_captcha
 
 Math_captcha helps you generating localized captchas for forms. It presents a simple math operation that should be performed by user in order to ensure she is a human. 
+
 This Gem is strongly inspired in visualcaptcha gem (https://github.com/kimenye/visualcaptcha)
 
 ## Installation
@@ -37,6 +38,10 @@ Add the following line in the file "app/controllers/application.rb"
         include MathCaptcha::ControllerHelpers
     end
 
+### I18n
+
+math_captcha currently supports I18n for English (en), Spanish (es) and Basque (eu). 
+It defaults to I18n.locale or Spanish.
 
 ## Contributing
 
