@@ -1,0 +1,11 @@
+<div class="math-captcha clearfix <%%= captcha_options[:type] %>">
+  <span class="captcha-explanation <%%= captcha_options[:type] %>">
+    <%%= challenge.question %>
+  </span>
+  <input class='captcha-input' type='text' name='captcha-value' size='4'>
+  <div class="captcha-possibilities <%%= captcha_options[:type] %> clearfix">
+    <%% challenge.options.each do |option| %>
+        <img src="/assets/<%%= option.image %>" class="vc-<%%= option.encrypted %>" data-value="<%%= option.encrypted %>" />
+    <%% end %>
+  </div>
+</div>
