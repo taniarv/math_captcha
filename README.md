@@ -40,7 +40,12 @@ Add the following line in the file "app/controllers/application.rb"
 
 ### I18n
 
-math_captcha currently supports I18n for English (en), Spanish (es) and Basque (eu). 
+math_captcha currently supports I18n for:
+
+  * English (en)
+  * Spanish (es) 
+  * Basque (eu)
+ 
 It defaults to I18n.locale or Spanish.
 
 ## Contributing
