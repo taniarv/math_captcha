@@ -6,7 +6,6 @@ module MathCaptcha
         session_challenge = session[:captcha]
         crypted_challenge = MathCaptcha::Utils.generate_key(params['captcha-value'])
         result = crypted_challenge === session_challenge
-        pr "result #{result}"
         return result
       else
         return false

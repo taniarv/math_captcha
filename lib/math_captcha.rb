@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require "math_captcha/version"
 require "math_captcha/engine"
 
@@ -35,14 +36,14 @@ module MathCaptcha
         },
 	'eu' => {
 	  0 => 'huts',
-          1 => 'bat',
-          2 => 'bi',
-          3 => 'hiru',
-          4 => 'lau',
+    1 => 'bat',
+    2 => 'bi',
+    3 => 'hiru',
+    4 => 'lau',
 	  5 => 'bost',
 	  6 => 'sei',
 	  7 => 'zazpi',
-   	  8 => 'zortzi',
+   	8 => 'zortzi',
 	  9 => 'bederatzi'	  
 	},
 	'en' => {
@@ -59,24 +60,23 @@ module MathCaptcha
 	}
       }
 
-      @ops = {
-        'es' => {
+  # temporary remove division operation
+
+  @ops = {
+  'es' => {
 	  '+' => 'más',
 	  '-' => 'menos',
-	  '*' => 'por',
-	  '/' => 'entre'
+	  '*' => 'por'
         },
 	'eu' => {
 	  '+' => 'gehi',
 	  '-' => 'ken',
-	  '*' => 'bider',
-	  '/' => 'zati'
+	  '*' => 'bider'
 	},
 	'en' => {
 	  '+' => 'plus',
 	  '-' => 'minus',
-	  '*' => 'times',
-	  '/' => 'divided by'
+	  '*' => 'times'
 	}
       }
     end
@@ -87,12 +87,15 @@ module MathCaptcha
     end	    
 
     def	build_challenge(options={})
-      digit1 = @numbers[rand(9)]
-      digit2 = @numbers[rand(9)]
-      op = @ops[locale].keys[rand(4)]
+      # loop to prevent negative numbers
+      begin 
+        digit1 = @numbers[rand(9)]
+        digit2 = @numbers[rand(9)]
+        op = @ops[locale].keys[rand(4)]
       
+        value = eval("#{digit1}#{op}#{digit2}")
+      end while value < 0
       
-      value = eval("#{digit1}#{op}#{digit2}")
       encrypted = MathCaptcha::Utils.generate_key(value)
       question = "#{@numbers_alpha[locale][digit1]} #{@ops[locale][op]} #{@numbers_alpha[locale][digit2]}"
       challenge = Challenge.new(question, value, encrypted, options)
