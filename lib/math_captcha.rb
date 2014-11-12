@@ -91,7 +91,7 @@ module MathCaptcha
       begin 
         digit1 = @numbers[rand(9)]
         digit2 = @numbers[rand(9)]
-        op = @ops[locale].keys[rand(4)]
+        op = @ops[locale].keys[rand(3)]
       
         value = eval("#{digit1}#{op}#{digit2}")
       end while value < 0
